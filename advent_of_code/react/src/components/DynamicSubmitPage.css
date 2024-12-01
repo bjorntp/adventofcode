@@ -1,0 +1,67 @@
+:root {
+  --c_red: #873807;
+  --light: #CFCFCF;
+  --pink: #B7637C;
+  --orange: #DBA139;
+  --green: #00873E;
+  --bg-top: #1E792C;
+  --bg-bot: #C30F16;
+  --light-red: #d11141;
+}
+
+.MainBox {
+  display: flex;
+  flex-Direction: column;
+  align-Items: center;
+  justify-Content: center;
+  height: 100vh;
+  text-Align: center;
+  background-Color: var(--light-red);
+  color: white;
+}
+
+.SubmitButton {
+  padding: 10px 20px;
+  background-Color: #00b159;
+  color: white;
+  border: none;
+  border-Radius: 5px;
+  cursor: pointer;
+}
+
+.BackToHomeButton {
+  margin-Top: 20px;
+  padding: 10px 20px;
+  background-Color: #d11141;
+  color: white;
+  border: none;
+  border-Radius: 5px;
+  cursor: pointer;
+
+  transition-duration: 0.5s;
+  transition-property: color background-color;
+}
+
+.BackToHomeButton:hover {
+  background-color: white;
+  color: var(--light-red);
+}
+
+.TextAndAnswer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.AnswerBox {
+  justify-content: center;
+}
+.AnswerHeader {
+
+}
+
+.AnswerText {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
