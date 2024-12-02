@@ -41,7 +41,7 @@ public class ExecutionTimer {
 
   public String toString() {
     if (startInstance != null || endInstance != null) {
-      return Long.toString(duration.toMillis());
+      return Long.toString(duration.toMillis()) + " ms";
     } else {
       throw new Error("No start or stop value");
     }
