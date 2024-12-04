@@ -11,13 +11,15 @@ public class S_03 extends Solution {
   private static final Pattern MULPATTERN = Pattern.compile("mul\\(\\d+,\\d+\\)");
   private static final Pattern DOPATTERN = Pattern.compile("do\\(\\)");
   private static final Pattern DONTPATTERN = Pattern.compile("don't\\(\\)");
+  private static final ExecutionTimer ET = new ExecutionTimer();
 
-  public S_03(String input) {
+  public S_03(String input){
     super(input);
   }
 
   @Override
   public String task_1() {
+    ET.start();
     Matcher mulMatcher;
     long total = 0;
 
@@ -26,6 +28,8 @@ public class S_03 extends Solution {
       String[] s = mulMatcher.group().replaceAll("mul\\(", "").replaceAll("\\)", "").split(",");
       total += Long.parseLong(s[0]) * Long.parseLong(s[1]);
     }
+    ET.stop();
+    System.out.println(ET);
     return Long.toString(total);
   }
 
@@ -35,6 +39,7 @@ public class S_03 extends Solution {
     Matcher dontMatcher = DONTPATTERN.matcher(input);
     Matcher mulMatcher = MULPATTERN.matcher(input);
     ArrayList<Tuple<Integer, Integer>> ranges = new ArrayList<>();
+    ET.start();
     long total = 0;
 
     dontMatcher.find();
@@ -57,6 +62,8 @@ public class S_03 extends Solution {
         }
       }
     }
+    ET.stop();
+    System.out.println(ET);
     return Long.toString(total);
   }
 }
