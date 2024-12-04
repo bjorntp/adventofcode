@@ -39,7 +39,7 @@ public class S_01 extends Solution {
         .sum();
 
     ET.stop();
-    System.out.println("Task 1: " + ET);
+    System.out.println("Task 1: " + ET + "ms");
     return String.valueOf(total) + " " + sum;
   }
 
