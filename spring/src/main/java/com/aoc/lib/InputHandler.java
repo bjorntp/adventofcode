@@ -5,21 +5,21 @@ package com.aoc.lib;
  */
 public class InputHandler {
 
-  private String rawInput;
+  private String input;
 
-  public InputHandler(String rawInput) {
-    this.rawInput = rawInput;
+  public InputHandler(String input) {
+    this.input = input;
   }
 
   /**
    * @return Array of each line stripped of trailing spaces
    */
   public String[] getLines() {
-    String[] returnString = rawInput.split("\n");
+    String[] returnString = input.split("\n");
     for (int i = 0; i < returnString.length; i++) {
       returnString[i] = returnString[i].strip();
     }
-    return rawInput.split("\n");
+    return input.split("\n");
   }
 
   public Character[][] getMatrix() {
@@ -41,6 +41,6 @@ public class InputHandler {
    * @return A string of the original input
    */
   public String raw() {
-    return rawInput;
+    return input;
   }
 }
