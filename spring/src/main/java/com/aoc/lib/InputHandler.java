@@ -29,9 +29,9 @@ public class InputHandler {
       matrix[i] = new Character[lines[i].length()];
       for (int j = 0; j < lines[i].length(); j++) {
         matrix[i][j] = lines[i].charAt(j);
-        System.out.print(matrix[i][j]);
+        // System.out.print(matrix[i][j]);
       }
-      System.out.println("");
+      // System.out.println("");
     }
 
     return matrix;

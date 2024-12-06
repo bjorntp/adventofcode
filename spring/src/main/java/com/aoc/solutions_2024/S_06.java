@@ -1,10 +1,11 @@
 package com.aoc.solutions_2024;
 
+import java.util.ArrayList;
+
 import com.aoc.lib.*;
 
 public class S_06 extends Solution {
 
-  private ExecutionTimer ET = new ExecutionTimer();
   private InputHandler IH;
 
   public S_06(String input) {
@@ -35,32 +36,53 @@ public class S_06 extends Solution {
   @Override
   public String task_2() {
     Character[][] map = IH.getMatrix();
-    Character[][] visited = new Character[map.length][map[0].length];
-    int nmbVisited = 1;
+    ArrayList<P> positions = new ArrayList<>();
+    int repeats = 0;
     Position p = new Position(map);
-    visited[p.getY()][p.getX()] = 'X';
+    Character[][] visited = new Character[map.length][map[0].length];
     while (true) {
       p.moveOneStep();
       if (p.getX() >= map[0].length && p.getY() >= map.length) {
         break;
       }
       if (visited[p.getY()][p.getX()] == null) {
-        nmbVisited++;
+        positions.add(new P(p.getX(), p.getY(), p.getDirection()));
       }
       visited[p.getY()][p.getX()] = 'X';
     }
-    return String.valueOf(nmbVisited);
+    for (int i = 0; i < positions.size(); i++) {
+      Character[][] tempMap = IH.getMatrix();
+      Position tempPosition = new Position(tempMap);
+      tempPosition.addObstacle(positions.get(i).getX(), positions.get(i).getY());
+      boolean x = true;
+      int j = 0;
+      System.out.println(i);
+      while (x) {
+        tempPosition.moveOneStep();
+        if (tempPosition.getX() >= map[0].length && tempPosition.getY() >= map.length) {
+          x = false;
+          break;
+        }
+        if (j == 10000) {
+          x = false;
+          repeats++;
+          break;
+        }
+        j++;
+      }
+    }
+
+    return String.valueOf(repeats);
   }
 
-  private class Position {
-    private int x;
-    private int y;
-    private String direction;
-    private Character[][] map;
+  private class P {
+    private int x, y;
+    private String dir;
 
-    public Position(Character[][] map) {
-      this.map = map;
-      findStart();
+    public P(int x, int y, String dir) {
+      this.dir = dir;
+      this.x = x;
+      this.y = y;
     }
 
     public int getX() {
@@ -71,10 +93,62 @@ public class S_06 extends Solution {
       return y;
     }
 
+    public String getDir() {
+      return dir;
+    }
+  }
+
+  private class Position {
+    private int startx, starty;
+    private int x;
+    private int y;
+    private String direction;
+    private Character[][] mapInPosition;
+
+    public Position(Character[][] map) {
+      this.mapInPosition = map;
+      findStart();
+      startx = x;
+      starty = y;
+    }
+
+    public int getStartx() {
+      return startx;
+    }
+
+    public int getStarty() {
+      return starty;
+    }
+
+    public int getX() {
+      return x;
+    }
+
+    public int getY() {
+      return y;
+    }
+
+    public String getDirection() {
+      if (direction == "UP") {
+        return "U";
+      }
+      if (direction == "DOWN") {
+        return "D";
+      }
+      if (direction == "LEFT") {
+        return "L";
+      }
+      return "R";
+    }
+
+    public void addObstacle(int xx, int yy) {
+      mapInPosition[yy][xx] = 'O';
+    }
+
     private void findStart() {
-      for (int i = 0; i < map.length; i++) {
-        for (int j = 0; j < map[i].length; j++) {
-          switch (map[j][i]) {
+      for (int i = 0; i < mapInPosition.length; i++) {
+        for (int j = 0; j < mapInPosition[i].length; j++) {
+          switch (mapInPosition[j][i]) {
             case '<':
               x = i;
               y = j;
@@ -123,12 +197,12 @@ public class S_06 extends Solution {
           nextY = y + 1;
           break;
       }
-      if (nextY >= map.length || nextX >= map[0].length || nextY < 0 || nextX < 0) {
+      if (nextY >= mapInPosition.length || nextX >= mapInPosition[0].length || nextY < 0 || nextX < 0) {
         x = Integer.MAX_VALUE;
         y = Integer.MAX_VALUE;
         return;
       }
-      if (map[nextY][nextX] != '#') {
+      if (mapInPosition[nextY][nextX] != '#' && mapInPosition[nextY][nextX] != 'O') {
         x = nextX;
         y = nextY;
       } else {

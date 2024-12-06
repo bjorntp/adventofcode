@@ -10,8 +10,6 @@ import com.aoc.lib.*;
 
 public class S_05 extends Solution {
 
-  private ExecutionTimer ET = new ExecutionTimer();
-
   public S_05(String input) {
     super(input);
   }

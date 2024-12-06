@@ -17,7 +17,6 @@ public class S_04 extends Solution {
     ET.start();
     String[] lines = IH.getLines();
     char[][] grid = new char[lines.length][lines[0].length()];
-    StringBuilder sb = new StringBuilder();
     for (int j = 0; j < lines.length; j++) {
       for (int i = 0; i < lines[0].length(); i++) {
         grid[j][i] = lines[j].charAt(i);
@@ -68,7 +67,6 @@ public class S_04 extends Solution {
     ET.start();
     String[] lines = IH.getLines();
     char[][] grid = new char[lines.length][lines[0].length()];
-    StringBuilder sb = new StringBuilder();
     for (int j = 0; j < lines.length; j++) {
       for (int i = 0; i < lines[0].length(); i++) {
         grid[j][i] = lines[j].charAt(i);
