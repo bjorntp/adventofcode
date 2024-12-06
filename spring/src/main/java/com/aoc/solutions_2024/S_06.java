@@ -7,14 +7,17 @@ import com.aoc.lib.*;
 public class S_06 extends Solution {
 
   private InputHandler IH;
+  private ExecutionTimer ET;
 
   public S_06(String input) {
     super(input);
     IH = new InputHandler(input);
+    ET = new ExecutionTimer();
   }
 
   @Override
   public String task_1() {
+    ET.start();
     Character[][] map = IH.getMatrix();
     Character[][] visited = new Character[map.length][map[0].length];
     int nmbVisited = 1;
@@ -30,11 +33,14 @@ public class S_06 extends Solution {
       }
       visited[p.getY()][p.getX()] = 'X';
     }
+    ET.stop();
+    System.out.println("Execution time task 1: " + ET);
     return String.valueOf(nmbVisited);
   }
 
   @Override
   public String task_2() {
+    ET.start();
     Character[][] map = IH.getMatrix();
     ArrayList<P> positions = new ArrayList<>();
     int repeats = 0;
@@ -46,7 +52,7 @@ public class S_06 extends Solution {
         break;
       }
       if (visited[p.getY()][p.getX()] == null) {
-        positions.add(new P(p.getX(), p.getY(), p.getDirection()));
+        positions.add(new P(p.getX(), p.getY()));
       }
       visited[p.getY()][p.getX()] = 'X';
     }
@@ -56,7 +62,6 @@ public class S_06 extends Solution {
       tempPosition.addObstacle(positions.get(i).getX(), positions.get(i).getY());
       boolean x = true;
       int j = 0;
-      System.out.println(i);
       while (x) {
         tempPosition.moveOneStep();
         if (tempPosition.getX() >= map[0].length && tempPosition.getY() >= map.length) {
@@ -72,15 +77,15 @@ public class S_06 extends Solution {
       }
     }
 
+    ET.stop();
+    System.out.println("Execution time task 2: " + ET);
     return String.valueOf(repeats);
   }
 
   private class P {
     private int x, y;
-    private String dir;
 
-    public P(int x, int y, String dir) {
-      this.dir = dir;
+    public P(int x, int y) {
       this.x = x;
       this.y = y;
     }
@@ -92,14 +97,9 @@ public class S_06 extends Solution {
     public int getY() {
       return y;
     }
-
-    public String getDir() {
-      return dir;
-    }
   }
 
   private class Position {
-    private int startx, starty;
     private int x;
     private int y;
     private String direction;
@@ -108,16 +108,6 @@ public class S_06 extends Solution {
     public Position(Character[][] map) {
       this.mapInPosition = map;
       findStart();
-      startx = x;
-      starty = y;
-    }
-
-    public int getStartx() {
-      return startx;
-    }
-
-    public int getStarty() {
-      return starty;
     }
 
     public int getX() {
