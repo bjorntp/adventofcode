@@ -75,8 +75,14 @@ public class S_07 extends Solution {
     }
     long val = variables.get(index);
     boolean booleanAdd = addmul_test(result, variables, currentNumber + val, index - 1);
+    if (booleanAdd) {
+      return true;
+    }
     boolean booleanMul = addmul_test(result, variables, currentNumber * val, index - 1);
-    return booleanAdd || booleanMul;
+    if (booleanMul) {
+      return true;
+    }
+    return false;
   }
 
   private boolean addmuland_test(long result, ArrayList<Long> variables, long currentNumber, int index) {
@@ -99,8 +105,17 @@ public class S_07 extends Solution {
     int nmbDigits = (int) Math.log10(val) + 1;
     long and = (long) (currentNumber * Math.pow(10, nmbDigits) + val);
     boolean booleanAdd = addmuland_test(result, variables, currentNumber + val, index - 1);
+    if (booleanAdd) {
+      return true;
+    }
     boolean booleanMul = addmuland_test(result, variables, currentNumber * val, index - 1);
+    if (booleanMul) {
+      return true;
+    }
     boolean booleanAnd = addmuland_test(result, variables, and, index - 1);
-    return booleanAdd || booleanMul || booleanAnd;
+    if (booleanAnd) {
+      return true;
+    }
+    return false;
   }
 }
