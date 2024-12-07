@@ -118,19 +118,6 @@ public class S_06 extends Solution {
       return y;
     }
 
-    public String getDirection() {
-      if (direction == "UP") {
-        return "U";
-      }
-      if (direction == "DOWN") {
-        return "D";
-      }
-      if (direction == "LEFT") {
-        return "L";
-      }
-      return "R";
-    }
-
     public void addObstacle(int xx, int yy) {
       mapInPosition[yy][xx] = 'O';
     }
