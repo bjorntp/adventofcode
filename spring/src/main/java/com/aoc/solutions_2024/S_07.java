@@ -96,7 +96,8 @@ public class S_07 extends Solution {
       }
     }
     long val = variables.get(index);
-    long and = Long.parseLong(String.valueOf(currentNumber) + String.valueOf(val));
+    int nmbDigits = (int) Math.log10(val) + 1;
+    long and = (long) (currentNumber * Math.pow(10, nmbDigits) + val);
     boolean booleanAdd = addmuland_test(result, variables, currentNumber + val, index - 1);
     boolean booleanMul = addmuland_test(result, variables, currentNumber * val, index - 1);
     boolean booleanAnd = addmuland_test(result, variables, and, index - 1);
