@@ -1,10 +1,87 @@
 package com.aoc.solutions_2024;
 
 import java.util.ArrayList;
-
 import com.aoc.lib.*;
 
 public class S_10 extends Solution {
+
+  private ExecutionTimer ET;
+  private InputHandler IH;
+
+  public S_10(String input) {
+    super(input);
+    ET = new ExecutionTimer();
+    IH = new InputHandler(input);
+  }
+
+  @Override
+  public String task_1() {
+    ET.start();
+    int acc = trailhead(true);
+    ET.stop();
+    System.out.println(ET.toString());
+    return String.valueOf(acc);
+  }
+
+  @Override
+  public String task_2() {
+    ET.start();
+    int acc = trailhead(false);
+    ET.stop();
+    System.out.println(ET.toString());
+    return String.valueOf(acc);
+  }
+
+  private int trailhead(boolean uniqueTrails) {
+    Character[][] charMap = IH.getMatrix();
+    int[][] intMap = new int[charMap.length][charMap[0].length];
+    ArrayList<Position> startingPositions = new ArrayList<>();
+    for (int i = 0; i < charMap.length; i++) {
+      for (int j = 0; j < charMap[i].length; j++) {
+        intMap[i][j] = (charMap[i][j] - '0');
+        if (intMap[i][j] == 0) {
+          startingPositions.add(new Position(j, i));
+        }
+      }
+    }
+    int acc = 0;
+    for (Position position : startingPositions) {
+      int[][] copy = new int[intMap.length][];
+      for (int i = 0; i < intMap.length; i++) {
+        copy[i] = intMap[i].clone();
+      }
+      int trails = trailheadFinder(position.getX(), position.getY(), 0, copy, uniqueTrails);
+      acc += trails;
+    }
+    return acc;
+  }
+
+  private int trailheadFinder(int x, int y, int height, int[][] map, boolean uniqueTrails) {
+    if (height == 9) {
+      if (uniqueTrails) {
+        map[y][x] = -1;
+      }
+      return 1;
+    }
+    int counter = 0;
+    if (x != 0 && map[y][x - 1] == height + 1) {
+      counter += trailheadFinder(x - 1, y, height + 1, map, uniqueTrails);
+    }
+
+    if (y != 0 && map[y - 1][x] == height + 1) {
+      counter += trailheadFinder(x, y - 1, height + 1, map, uniqueTrails);
+    }
+
+    if (x != map[y].length - 1 && map[y][x + 1] == height + 1) {
+      counter += trailheadFinder(x + 1, y, height + 1, map, uniqueTrails);
+    }
+
+    if (y != map.length - 1 && map[y + 1][x] == height + 1) {
+      counter += trailheadFinder(x, y + 1, height + 1, map, uniqueTrails);
+    }
+    return counter;
+  }
+
   /**
    * Position
    */
@@ -23,126 +100,5 @@ public class S_10 extends Solution {
     public int getY() {
       return y;
     }
-
-  }
-
-  private ExecutionTimer ET;
-
-  private InputHandler IH;
-
-  public S_10(String input) {
-    super(input);
-    ET = new ExecutionTimer();
-    IH = new InputHandler(input);
-  }
-
-  @Override
-  public String task_1() {
-    ET.start();
-    Character[][] charMap = IH.getMatrix();
-    int[][] intMap = new int[charMap.length][charMap[0].length];
-    ArrayList<Position> startingPositions = new ArrayList<>();
-    for (int i = 0; i < charMap.length; i++) {
-      for (int j = 0; j < charMap[i].length; j++) {
-        intMap[i][j] = (charMap[i][j] - '0');
-        if (intMap[i][j] == 0) {
-          startingPositions.add(new Position(j, i));
-        }
-      }
-    }
-
-    int acc = 0;
-    for (Position position : startingPositions) {
-      int[][] copy = new int[intMap.length][];
-      for (int i = 0; i < intMap.length; i++) {
-        copy[i] = intMap[i].clone();
-      }
-      int xD = trailheadFinder(position.getX(), position.getY(), 0, copy);
-      acc += xD;
-    }
-    ET.stop();
-    System.out.println(ET.toString());
-    return String.valueOf(acc);
-  }
-
-  @Override
-  public String task_2() {
-    ET.start();
-    Character[][] charMap = IH.getMatrix();
-    int[][] intMap = new int[charMap.length][charMap[0].length];
-    ArrayList<Position> startingPositions = new ArrayList<>();
-    for (int i = 0; i < charMap.length; i++) {
-      for (int j = 0; j < charMap[i].length; j++) {
-        intMap[i][j] = (charMap[i][j] - '0');
-        if (intMap[i][j] == 0) {
-          startingPositions.add(new Position(j, i));
-        }
-      }
-    }
-
-    int acc = 0;
-    for (Position position : startingPositions) {
-      int[][] copy = new int[intMap.length][];
-      for (int i = 0; i < intMap.length; i++) {
-        copy[i] = intMap[i].clone();
-      }
-      int xD = trailFinder(position.getX(), position.getY(), 0, copy);
-      acc += xD;
-    }
-    ET.stop();
-    System.out.println(ET.toString());
-    return String.valueOf(acc);
-
-  }
-
-  private int trailFinder(int x, int y, int height, int[][] map) {
-    if (height == 9) {
-      return 1;
-    }
-
-    int counter = 0;
-    if (x != 0 && map[y][x - 1] == height + 1) {
-      counter += trailFinder(x - 1, y, height + 1, map);
-    }
-
-    if (y != 0 && map[y - 1][x] == height + 1) {
-      counter += trailFinder(x, y - 1, height + 1, map);
-    }
-
-    if (x != map[y].length - 1 && map[y][x + 1] == height + 1) {
-      counter += trailFinder(x + 1, y, height + 1, map);
-    }
-
-    if (y != map.length - 1 && map[y + 1][x] == height + 1) {
-      counter += trailFinder(x, y + 1, height + 1, map);
-    }
-
-    return counter;
-  }
-
-  private int trailheadFinder(int x, int y, int height, int[][] map) {
-    if (height == 9) {
-      map[y][x] = -1;
-      return 1;
-    }
-
-    int counter = 0;
-    if (x != 0 && map[y][x - 1] == height + 1) {
-      counter += trailheadFinder(x - 1, y, height + 1, map);
-    }
-
-    if (y != 0 && map[y - 1][x] == height + 1) {
-      counter += trailheadFinder(x, y - 1, height + 1, map);
-    }
-
-    if (x != map[y].length - 1 && map[y][x + 1] == height + 1) {
-      counter += trailheadFinder(x + 1, y, height + 1, map);
-    }
-
-    if (y != map.length - 1 && map[y + 1][x] == height + 1) {
-      counter += trailheadFinder(x, y + 1, height + 1, map);
-    }
-
-    return counter;
   }
 }
