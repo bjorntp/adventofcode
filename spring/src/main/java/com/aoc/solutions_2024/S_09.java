@@ -58,13 +58,89 @@ public class S_09 extends Solution {
       total += i * localid;
     }
     ET.stop();
-
     System.out.println("Task 1: " + ET);
     return String.valueOf(total);
   }
 
   @Override
   public String task_2() {
-    return "!";
+    ET.start();
+    Pattern digitPattern = Pattern.compile("\\d");
+    Matcher digitMatcher = digitPattern.matcher(input);
+    long index = -1;
+    long id = 0;
+    ArrayList<digitString> files = new ArrayList<>();
+    while (digitMatcher.find()) {
+      index++;
+      if (index % 2 == 0) {
+        files.add(new digitString(id, Long.parseLong(digitMatcher.group())));
+        id++;
+      } else {
+        files.add(new digitString(-1l, Long.parseLong(digitMatcher.group())));
+      }
+    }
+    for (int i = files.size() - 1; i > 0; i--) {
+      long rightDigit = files.get(i).getDigit();
+      long rightLength = files.get(i).getLength();
+      if (rightDigit != -1) {
+        for (int j = 0; j < files.size(); j++) {
+          if (files.get(j).getDigit() == -1 && files.get(j).getLength() >= rightLength) {
+            if (j > i)
+              break;
+            digitString temp = files.remove(i);
+            files.add(j, temp);
+            long newLength = files.get(j + 1).getLength() - rightLength;
+            files.get(j + 1).setLength(newLength);
+            files.add(i, new digitString(-1, temp.getLength()));
+            break;
+          }
+        }
+      }
+    }
+    long total = 0;
+    int multiplier = 0;
+    for (int i = 0; i < files.size(); i++) {
+      long localid = files.get(i).getDigit();
+      if (localid == -1) {
+        multiplier += files.get(i).getLength();
+      } else {
+        for (int j = 0; j < files.get(i).getLength(); j++) {
+          total += multiplier * localid;
+          multiplier++;
+        }
+      }
+    }
+    ET.stop();
+    System.out.println("Task 2: " + ET);
+    return String.valueOf(total);
+  }
+
+  /**
+   * digitString
+   */
+  public class digitString {
+    long digit;
+    long length;
+
+    public digitString(long digit, long length) {
+      this.digit = digit;
+      this.length = length;
+    }
+
+    public long getDigit() {
+      return digit;
+    }
+
+    public long getLength() {
+      return length;
+    }
+
+    public void setDigit(long digit) {
+      this.digit = digit;
+    }
+
+    public void setLength(long length) {
+      this.length = length;
+    }
   }
 }
