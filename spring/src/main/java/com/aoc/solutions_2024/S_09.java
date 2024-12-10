@@ -8,12 +8,10 @@ import com.aoc.lib.*;
 
 public class S_09 extends Solution {
   private ExecutionTimer ET;
-  private InputHandler IH;
 
   public S_09(String input) {
     super(input);
     ET = new ExecutionTimer();
-    IH = new InputHandler(input);
   }
 
   @Override
