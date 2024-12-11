@@ -7,17 +7,14 @@ import com.aoc.lib.*;
 public class S_06 extends Solution {
 
   private InputHandler IH;
-  private ExecutionTimer ET;
 
   public S_06(String input) {
     super(input);
     IH = new InputHandler(input);
-    ET = new ExecutionTimer();
   }
 
   @Override
   public String task_1() {
-    ET.start();
     Character[][] map = IH.getMatrix();
     Character[][] visited = new Character[map.length][map[0].length];
     int nmbVisited = 1;
@@ -33,14 +30,11 @@ public class S_06 extends Solution {
       }
       visited[p.getY()][p.getX()] = 'X';
     }
-    ET.stop();
-    System.out.println("Execution time task 1: " + ET);
     return String.valueOf(nmbVisited);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     Character[][] map = IH.getMatrix();
     ArrayList<P> positions = new ArrayList<>();
     int repeats = 0;
@@ -77,8 +71,6 @@ public class S_06 extends Solution {
       }
     }
 
-    ET.stop();
-    System.out.println("Execution time task 2: " + ET);
     return String.valueOf(repeats);
   }
 

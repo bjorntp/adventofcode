@@ -3,18 +3,15 @@ package com.aoc.solutions_2024;
 import com.aoc.lib.*;
 
 public class S_02 extends Solution {
-  private ExecutionTimer ET;
   private InputHandler IH;
 
   public S_02(String input) {
     super(input);
-    ET = new ExecutionTimer();
     IH = new InputHandler(input);
   }
 
   @Override
   public String task_1() {
-    ET.start();
     String[] lines = IH.getLines();
     long safeCounter = 0;
     for (String line : lines) {
@@ -27,14 +24,11 @@ public class S_02 extends Solution {
         safeCounter++;
       }
     }
-    ET.stop();
-    System.out.println(ET);
     return String.valueOf(safeCounter);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     String[] lines = IH.getLines();
     long safeCounter = 0;
     for (String line : lines) {
@@ -54,8 +48,6 @@ public class S_02 extends Solution {
         }
       }
     }
-    ET.stop();
-    System.out.println(ET);
     return String.valueOf(safeCounter);
   }
 

@@ -7,16 +7,13 @@ import java.util.regex.Pattern;
 import com.aoc.lib.*;
 
 public class S_09 extends Solution {
-  private ExecutionTimer ET;
 
   public S_09(String input) {
     super(input);
-    ET = new ExecutionTimer();
   }
 
   @Override
   public String task_1() {
-    ET.start();
     Pattern digitPattern = Pattern.compile("\\d");
     Matcher digitMatcher = digitPattern.matcher(input);
     long index = -1;
@@ -55,14 +52,11 @@ public class S_09 extends Solution {
       }
       total += i * localid;
     }
-    ET.stop();
-    System.out.println("Task 1: " + ET);
     return String.valueOf(total);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     Pattern digitPattern = Pattern.compile("\\d");
     Matcher digitMatcher = digitPattern.matcher(input);
     long index = -1;
@@ -108,8 +102,6 @@ public class S_09 extends Solution {
         }
       }
     }
-    ET.stop();
-    System.out.println("Task 2: " + ET);
     return String.valueOf(total);
   }
 

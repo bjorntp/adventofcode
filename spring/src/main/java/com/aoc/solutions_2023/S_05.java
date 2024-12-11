@@ -2,7 +2,6 @@ package com.aoc.solutions_2023;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import com.aoc.lib.*;
@@ -14,7 +13,6 @@ public class S_05 extends Solution {
   }
 
   public String task_1() {
-    Instant starts = Instant.now();
     String[] sections = input.split("\\n\\n");
     sections[0] = sections[0].split(": ")[1];
     for (int i = 1; i < sections.length; i++) {
@@ -39,9 +37,6 @@ public class S_05 extends Solution {
         min = currentPosition;
       }
     }
-
-    Instant ends = Instant.now();
-    System.out.println("Execution time for task 1: " + Duration.between(starts, ends));
 
     DecimalFormat df = new DecimalFormat("#.##");
     return String.valueOf(df.format(min));
@@ -101,7 +96,6 @@ public class S_05 extends Solution {
     for (int i = 1; i < sections.length; i++) {
       sections[i] = sections[i].split(":\\n")[1];
     }
-    Instant starts = Instant.now();
 
     String[] seeds = sections[0].split(" ");
 
@@ -157,8 +151,6 @@ public class S_05 extends Solution {
       }
     }
 
-    Instant ends = Instant.now();
-    System.out.println("Execution time for task 2: " + Duration.between(starts, ends));
     DecimalFormat df = new DecimalFormat("#.##");
     return String.valueOf(df.format(min));
 

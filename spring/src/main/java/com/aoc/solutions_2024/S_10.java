@@ -5,30 +5,22 @@ import com.aoc.lib.*;
 
 public class S_10 extends Solution {
 
-  private ExecutionTimer ET;
   private InputHandler IH;
 
   public S_10(String input) {
     super(input);
-    ET = new ExecutionTimer();
     IH = new InputHandler(input);
   }
 
   @Override
   public String task_1() {
-    ET.start();
     int acc = trailhead(true);
-    ET.stop();
-    System.out.println(ET.toString());
     return String.valueOf(acc);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     int acc = trailhead(false);
-    ET.stop();
-    System.out.println(ET.toString());
     return String.valueOf(acc);
   }
 

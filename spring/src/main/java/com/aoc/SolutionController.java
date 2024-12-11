@@ -35,6 +35,6 @@ public class SolutionController {
       System.out.println(e);
       return Arrays.asList("This day is not implemented yet", "This day is not implemented yet");
     }
-    return Arrays.asList(solution.task_1(), solution.task_2());
+    return Arrays.asList(solution.run_task_1(), solution.run_task_2());
   }
 }

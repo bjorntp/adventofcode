@@ -18,8 +18,6 @@ public class S_08 extends Solution {
 
   @Override
   public String task_1() {
-    ExecutionTimer timer = new ExecutionTimer();
-    timer.start();
     String[] lines = inputHandler.getLines();
     String sequence = lines[0];
     HashMap<String, Tuple<String, String>> mappings = new HashMap<>();
@@ -41,8 +39,6 @@ public class S_08 extends Solution {
       }
 
       if (currentNode.equals("ZZZ")) {
-        timer.stop();
-        System.out.println(timer.toString() + " ms");
         return Integer.toString(i + 1);
       }
     }
@@ -50,8 +46,6 @@ public class S_08 extends Solution {
 
   @Override
   public String task_2() {
-    ExecutionTimer timer = new ExecutionTimer();
-    timer.start();
     String[] lines = inputHandler.getLines();
     String sequence = lines[0];
     HashMap<String, Tuple<String, String>> mappings = new HashMap<>();

@@ -7,17 +7,14 @@ import com.aoc.lib.*;
 public class S_07 extends Solution {
 
   InputHandler IH;
-  ExecutionTimer ET;
 
   public S_07(String input) {
     super(input);
     IH = new InputHandler(input);
-    ET = new ExecutionTimer();
   }
 
   @Override
   public String task_1() {
-    ET.start();
     String[] lines = IH.getLines();
     long total = 0;
     for (var line : lines) {
@@ -31,14 +28,11 @@ public class S_07 extends Solution {
         total += result;
       }
     }
-    ET.stop();
-    System.out.println(ET);
     return String.valueOf(total);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     String[] lines = IH.getLines();
     long total = 0;
     for (var line : lines) {
@@ -52,8 +46,6 @@ public class S_07 extends Solution {
         total += result;
       }
     }
-    ET.stop();
-    System.out.println(ET);
     return String.valueOf(total);
   }
 

@@ -5,7 +5,6 @@ import com.aoc.lib.*;
 public class S_04 extends Solution {
 
   private InputHandler IH;
-  private ExecutionTimer ET = new ExecutionTimer();
 
   public S_04(String input) {
     super(input);
@@ -14,7 +13,6 @@ public class S_04 extends Solution {
 
   @Override
   public String task_1() {
-    ET.start();
     String[] lines = IH.getLines();
     char[][] grid = new char[lines.length][lines[0].length()];
     for (int j = 0; j < lines.length; j++) {
@@ -45,9 +43,6 @@ public class S_04 extends Solution {
         }
       }
     }
-    ET.stop();
-    System.out.println(ET);
-
     return Integer.toString(wordcounter);
   }
 
@@ -64,7 +59,6 @@ public class S_04 extends Solution {
 
   @Override
   public String task_2() {
-    ET.start();
     String[] lines = IH.getLines();
     char[][] grid = new char[lines.length][lines[0].length()];
     for (int j = 0; j < lines.length; j++) {
@@ -81,9 +75,6 @@ public class S_04 extends Solution {
         }
       }
     }
-
-    ET.stop();
-    System.out.println(ET);
 
     return Integer.toString(wordcounter);
   }

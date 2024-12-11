@@ -8,18 +8,15 @@ import java.util.Collections;
 import com.aoc.lib.*;
 
 public class S_01 extends Solution {
-  private ExecutionTimer ET;
   private InputHandler IH;
 
   public S_01(String input) {
     super(input);
-    ET = new ExecutionTimer();
     IH = new InputHandler(input);
   }
 
   @Override
   public String task_1() {
-    ET.start();
     String[] lines = IH.getLines();
 
     List<Long> l1 = new ArrayList<>();
@@ -32,20 +29,16 @@ public class S_01 extends Solution {
 
     Collections.sort(l1);
     Collections.sort(l2);
-    long total = 0;
 
     long sum = IntStream.range(0, l1.size())
         .mapToLong(i -> Math.abs(l1.get(i) - l2.get(i)))
         .sum();
 
-    ET.stop();
-    System.out.println("Task 1: " + ET + "ms");
-    return String.valueOf(total) + " " + sum;
+    return String.valueOf(sum);
   }
 
   @Override
   public String task_2() {
-    ET.start();
     ArrayList<Long> l1 = new ArrayList<>();
     ArrayList<Long> l2 = new ArrayList<>();
     String[] lines = IH.getLines();
@@ -74,8 +67,6 @@ public class S_01 extends Solution {
       totalScore += cc * l1.get(j);
     }
 
-    ET.stop();
-    System.out.println("Task 2: " + ET);
     return String.valueOf(totalScore);
   }
 }

@@ -7,17 +7,14 @@ import com.aoc.lib.*;
 
 public class S_11 extends Solution {
 
-  private ExecutionTimer ET;
   private HashMap<String, Long> savedNumbers;
 
   public S_11(String input) {
     super(input);
-    ET = new ExecutionTimer();
   }
 
   @Override
   public String task_1() {
-    ET.start();
     savedNumbers = new HashMap<>();
     String[] stringInput = input.split(" ");
     LinkedList<Long> numbers = new LinkedList<>();
@@ -29,15 +26,12 @@ public class S_11 extends Solution {
       sum += countStones(number, 6);
     }
 
-    ET.stop();
-    System.out.println(ET.toString());
     return String.valueOf(sum);
 
   }
 
   @Override
   public String task_2() {
-    ET.start();
     String[] stringInput = input.split(" ");
     LinkedList<Long> numbers = new LinkedList<>();
     savedNumbers = new HashMap<>();
@@ -48,8 +42,6 @@ public class S_11 extends Solution {
     for (Long number : numbers) {
       sum += countStones(number, 75);
     }
-    ET.stop();
-    System.out.println(ET.toString());
     return String.valueOf(sum);
   }
 
