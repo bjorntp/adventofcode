@@ -5,7 +5,7 @@ import com.aoc.lib.*;
 public class S_12 extends Solution {
 
   private InputHandler IH;
-  private int area, perimeter, sides;
+  private int area, perimeter;
   private Character[][] map;
   private int corners;
 
@@ -21,11 +21,9 @@ public class S_12 extends Solution {
     for (int i = 0; i < map.length; i++) {
       for (int j = 0; j < map[i].length; j++) {
         if (map[i][j] != '1') {
-          char a = map[i][j];
           area = 0;
           perimeter = 0;
           findAdjacent(map[i][j], j, i);
-          System.out.println("Letter: " + a + ", area: " + area + ", perimeter: " + perimeter);
           total += area * perimeter;
           for (int k = 0; k < map.length; k++) {
             for (int l = 0; l < map[k].length; l++) {
@@ -84,14 +82,10 @@ public class S_12 extends Solution {
     for (int i = 0; i < map.length; i++) {
       for (int j = 0; j < map[i].length; j++) {
         if (map[i][j] != '1') {
-          char a = map[i][j];
           area = 0;
-          sides = 0;
           corners = 0;
           findAdjacentSecond(map[i][j], j, i);
-          sides = corners;
-          System.out.println("Letter: " + a + ", area: " + area + ", sides: " + sides);
-          total += area * sides;
+          total += area * corners;
           for (int k = 0; k < map.length; k++) {
             for (int l = 0; l < map[k].length; l++) {
               if (map[k][l] == '0') {
