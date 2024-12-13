@@ -38,6 +38,30 @@ public class S_12 extends Solution {
     return String.valueOf(total);
   }
 
+  @Override
+  public String task_2() {
+    map = IH.getMatrix();
+    int total = 0;
+    for (int i = 0; i < map.length; i++) {
+      for (int j = 0; j < map[i].length; j++) {
+        if (map[i][j] != '1') {
+          area = 0;
+          corners = 0;
+          findAdjacentSecond(map[i][j], j, i);
+          total += area * corners;
+          for (int k = 0; k < map.length; k++) {
+            for (int l = 0; l < map[k].length; l++) {
+              if (map[k][l] == '0') {
+                map[k][l] = '1';
+              }
+            }
+          }
+        }
+      }
+    }
+    return String.valueOf(total);
+  }
+
   private void findAdjacent(char letter, int x, int y) {
     area++;
     map[y][x] = '0';
@@ -73,30 +97,6 @@ public class S_12 extends Solution {
     } else if (map[y + 1][x] != '0') {
       perimeter++;
     }
-  }
-
-  @Override
-  public String task_2() {
-    map = IH.getMatrix();
-    int total = 0;
-    for (int i = 0; i < map.length; i++) {
-      for (int j = 0; j < map[i].length; j++) {
-        if (map[i][j] != '1') {
-          area = 0;
-          corners = 0;
-          findAdjacentSecond(map[i][j], j, i);
-          total += area * corners;
-          for (int k = 0; k < map.length; k++) {
-            for (int l = 0; l < map[k].length; l++) {
-              if (map[k][l] == '0') {
-                map[k][l] = '1';
-              }
-            }
-          }
-        }
-      }
-    }
-    return String.valueOf(total);
   }
 
   private void findAdjacentSecond(char letter, int x, int y) {
