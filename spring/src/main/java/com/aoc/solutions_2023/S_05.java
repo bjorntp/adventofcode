@@ -1,7 +1,6 @@
 package com.aoc.solutions_2023;
 
 import java.text.DecimalFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import com.aoc.lib.*;
