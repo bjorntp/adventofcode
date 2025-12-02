@@ -14,7 +14,7 @@ public abstract class Solution {
     ET.start();
     var ret = task_1();
     ET.stop();
-    System.out.println("Execution time: " + ET.toString());
+    System.out.println("Execution time task 1: " + ET.toString());
     return ret;
   }
 
@@ -22,12 +22,11 @@ public abstract class Solution {
     ET.start();
     var ret = task_2();
     ET.stop();
-    System.out.println("Execution time: " + ET.toString());
+    System.out.println("Execution time task 2: " + ET.toString());
     return ret;
   }
 
   public abstract String task_1();
 
   public abstract String task_2();
-
 }
