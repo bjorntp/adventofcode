@@ -1,6 +1,8 @@
 package com.aoc.solutions_2025;
 
 import com.aoc.lib.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class S_02 extends Solution {
   private InputHandler IH;
@@ -12,72 +14,28 @@ public class S_02 extends Solution {
 
   @Override
   public String task_1() {
-    String[] lines = IH.getLines();
-    long safeCounter = 0;
-    for (String line : lines) {
-      String[] tokens = line.split(" ");
-      int[] numbers = new int[tokens.length];
-      for (int i = 0; i < tokens.length; i++) {
-        numbers[i] = Integer.parseInt(tokens[i]);
-      }
-      if (isSafe(numbers)) {
-        safeCounter++;
-      }
-    }
-    return String.valueOf(safeCounter);
+    Pattern pattern = Pattern.compile("(\\d+)\\1");
+    return solver(pattern);
   }
 
   @Override
   public String task_2() {
-    String[] lines = IH.getLines();
-    long safeCounter = 0;
-    for (String line : lines) {
-      String[] tokens = line.split(" ");
-      int[] numbers = new int[tokens.length];
-      for (int i = 0; i < tokens.length; i++) {
-        numbers[i] = Integer.parseInt(tokens[i]);
-      }
-      if (isSafe(numbers)) {
-        safeCounter++;
-      } else {
-        for (int i = 0; i < numbers.length; i++) {
-          if (isSafe(removeIndex(i, numbers))) {
-            safeCounter++;
-            break;
-          }
+    Pattern pattern = Pattern.compile("(\\d+)\\1+");
+    return solver(pattern);
+  }
+
+  private String solver(Pattern pattern) {
+    long invalidCounter = 0;
+    String[] h = IH.getLines()[0].split(",");
+    for (int i = 0; i < h.length; i++) {
+      String[] k = h[i].split("-");
+      for (long j = Long.parseLong(k[0]); j < Long.parseLong(k[1]) + 1; j++) {
+        Matcher match = pattern.matcher(String.valueOf(j));
+        if (match.matches()) {
+          invalidCounter += j;
         }
       }
     }
-    return String.valueOf(safeCounter);
-  }
-
-  private boolean isSafe(int[] x) {
-    boolean difference = true, increase = true, decrease = true;
-    for (int i = 1; i < x.length; i++) {
-      if (x[i] >= x[i - 1]) {
-        decrease = false;
-      }
-      if (x[i] <= x[i - 1]) {
-        increase = false;
-      }
-      if (Math.abs(x[i] - x[i - 1]) > 3) {
-        difference = false;
-      }
-    }
-    return difference && (increase || decrease);
-  }
-
-  private int[] removeIndex(int i, int[] a) {
-    int b[] = new int[a.length - 1];
-    for (int j = 0; j < b.length; j++) {
-      if (j == i) {
-        break;
-      }
-      b[j] = a[j];
-    }
-    for (int j = i; j < b.length; j++) {
-      b[j] = a[j + 1];
-    }
-    return b;
+    return String.valueOf(invalidCounter);
   }
 }
